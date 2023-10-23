@@ -53,7 +53,9 @@ class World
 
      void displayWorld(string one, string two, string three, bool levelDoneOne,  bool levelDoneTwo, bool levelDoneThree)
      {
-        //Prints the Name of the Current World First, then Prints the Levels that are left to complete after it
+        /*Prints the Name of the Current World First, then prints the Levels that are left to complete afterwards
+        (hiding completed levels from the user's visibility to prevent confusion)*/
+        
         cout<<"\n\n";
         printName();
         if( (levelDoneOne == false) && (levelDoneTwo == false) && (levelDoneThree == false) )
@@ -88,6 +90,9 @@ class World
 class Level
 {
     private: string name; bool isPassed = false; string dialogue; string instructions; string answer; bool isLevelOne = false; char buy; bool isLevelTwo = false; bool isItemHouse = false; bool isLastLevel;
+
+/*Virtual functions are "virtual" in order for the Item House Levels to have their own version of level passage requirements,
+display, and name setting*/
 
     public:
         virtual void setName(string levelName){name = levelName;};
@@ -170,8 +175,10 @@ class ItemHouse : public Level
     private: string name; int liveCost = 2; int liveGained = 2; int hintCost = 3; bool isPassed = false; string instructions; string hint; char worldPosition;
 
     public:
-        char buy;
-        bool bought = false;
+        char buy;  //User input to determine what type of item the user bought.
+        bool bought = false;  /*Global variable that determines if an item was bought from the ItemHouse, thus determining if the 
+                                level is completed or not. */
+
         void setName(string levelName){name = levelName;};
         void setLiveC(int lcost){lcost = liveCost;};
         void setHintsC(int hcost){hcost = hintCost;};
@@ -187,14 +194,12 @@ class ItemHouse : public Level
         {
                 if (buy == 'a')
                 {
-                    bought = true;
                     coins = coins - liveCost;
                     lives = lives + liveGained;
                     cout<<"Purchased! Eat up!\n";
                 }
                 else if (buy == 'c')
                 {
-                    bought = true;
                     coins = coins - hintCost;
                     cout<<"Purchased! Your hint to give you some guidance is: "<<hint<<"(You might want to write this down.)\n";
                 }
@@ -229,6 +234,7 @@ class ItemHouse : public Level
         };
 };
 
+//Resets all of the levels isPassed variables back to their initial false values, using each level's reset() function
 void reset_Game(Level* one, Level* two, Level* three, Level* four, Level* five, Level* six, Level* seven, Level* eight, Level* nine, Level* ten)
 {
     coins = 0;
@@ -246,6 +252,11 @@ void reset_Game(Level* one, Level* two, Level* three, Level* four, Level* five, 
     ten->reset();
 }
 
+/*This function uses the displayWorld functions of each World and its respective levels in order to "execute" or 
+  "take the user through that world". The multiple exectute world functions in succession in the main game, allow for the code to
+  continue the game based on user input, and constantly display one new wrold after the other until the game is finished.
+*/
+  
 void executeWorld(World* currentW, Level* firstL, Level* secondL, Level* thirdL)
 {
                 while((firstL->getIsPassed() !=true) && (lives > 0))
@@ -272,6 +283,9 @@ void executeWorld(World* currentW, Level* firstL, Level* secondL, Level* thirdL)
                     currentW->WorldPassed();  
                 } 
 }
+
+/*This function restes the game with a conclusion and final completion message if completed, or a Game Over message 
+  if the deaths exceeded the limit. Then, it restes all the levels and gives the start message for the user to replay the game. */
 
 void GAME_OVER(Level* LevelOne, Level* LevelTwo, Level* LevelThree, Level* LevelFour, Level* LevelFive, Level* LevelSix, Level* LevelSeven, Level* LevelEight, Level* LevelNine, Level* LevelTen)
 {
