@@ -83,6 +83,10 @@ int main()
     {
             for(;;)
             {
+                /*Loop that automatically moves through the worlds and is controlled purely by user input, changing 
+                  from one world to the next until 
+                  the user completes all of them. */
+                
                     while ((lives > 0) && !(GAME_COMPLETE))
                     {
                         executeWorld(&wOne, &lOne, &lTwo, &lThree);
