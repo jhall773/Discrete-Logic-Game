@@ -197,5 +197,16 @@ canvas.emscripten { border: 0px none; background-color: black; }
       };
     </script>
     <script async type="text/javascript" src="mainGame.js"></script>
-  </body>
+</head>
+<body>
+  <h1>Loading Game...</h1>
+  <script>
+    // This function will be called when the WebAssembly module is loaded
+    Module.onRuntimeInitialized = function() {
+      document.body.innerHTML = '<h1>Game Loaded!</h1>';
+      // Initialize your game here
+      Module._callMain();
+    };
+  </script>
+</body>
 </html>
