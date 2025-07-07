@@ -96,10 +96,10 @@ display, and name setting*/
 
     public:
         virtual void setName(string levelName){name = levelName;};
-        void setIsLastLevel(){bool gameDone = isLastLevel;};
+        void setIsLastLevel(bool gameDone){isLastLevel = gameDone;};
         void setIsLevelOne(bool level){isLevelOne = level;};
         void setIsLevelTwo(bool levelT){isLevelTwo = levelT;};
-        void setIsItemHouse(bool isItem){isItem = isItemHouse;};
+        void setIsItemHouse(bool isItem){isItemHouse = isItem;};
         void setDialogue(string levelDialogue){dialogue = levelDialogue;};
         void setInstructions(string levelObjective){instructions = levelObjective;};
         void setAnswer(string levelAnswer){answer = levelAnswer;};
