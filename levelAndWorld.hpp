@@ -180,9 +180,9 @@ class ItemHouse : public Level
                                 level is completed or not. */
 
         void setName(string levelName){name = levelName;};
-        void setLiveC(int lcost){lcost = liveCost;};
-        void setHintsC(int hcost){hcost = hintCost;};
-        void setLiveG(int lg){lg = liveGained;};
+        void setLiveC(int lcost){liveCost = lcost;};
+        void setHintsC(int hcost){hintCost = hcost;};
+        void setLiveG(int lg){liveGained = lg;};
         void setOptions(string items){instructions = items;}; 
         void setHint(string levelHint){hint = levelHint;};
         void setWorldPosition(char Position){worldPosition = Position;};
